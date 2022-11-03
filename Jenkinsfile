@@ -2,6 +2,10 @@ pipeline {
 
 
     agent any
+    tools {
+		maven 'M2_HOME'
+		        }
+
     stages {
 
 
@@ -12,13 +16,19 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/mohamedchaali2020/devops.git'
             }
         }
-        stage ('UNIT testing') {
+        
+        stage('Cleaning the project') {
+                 steps{
+                    sh "mvn -B -DskipTests clean  "
+                    }
+                }
 
-            steps {
 
-                sh 'nvm test'
-            }
-        }
+	    stage('Build') {
+      		    steps {
+       		sh 'mvn -B -DskipTests clean package'
+      	          }
+           	}
         
         
     }
