@@ -46,8 +46,9 @@ sh 'mvn verify -DskipUnitTests'
 }
 stage('SonarQube'){
                 steps {
-withSonarQubeEnv(credentialsId:'Mohamedchaali') 
+withSonarQubeEnv(credentialsId: 'Mohamedchaali') {
     sh 'mvn clean package sonar:sonar'
+}
 }
 }
 }
