@@ -14,7 +14,7 @@ pipeline {
 
             steps {
 
-                git branch: 'main', url: 'https://github.com/mohamedchaali2020/devops.git'
+                git branch: 'Mohamedchaali', url: 'https://github.com/mohamedchaali2020/devops.git'
             }
         }
         
