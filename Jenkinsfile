@@ -38,6 +38,11 @@ pipeline {
                 echo """Bravo! tous les tests sont pris en charge"""
                 }
             }
-        
+         stage("SonarQube Analysis") {
+                             steps {
+                               withSonarQubeEnv('sonar') {
+                                 sh 'mvn clean -DskipTests package sonar:sonar'
+                               }
+                             }
     }
 }
