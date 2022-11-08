@@ -42,6 +42,10 @@ pipeline {
                              steps {
                                withSonarQubeEnv('sonar') {
                                  sh 'mvn clean -DskipTests package sonar:sonar'
+mvn sonar:sonar \
+  -Dsonar.projectKey=Mohamedchaali \
+  -Dsonar.host.url=http://192.168.1.182:9000 \
+  -Dsonar.login=31f2074f9235ba1ffcbb197cd05494d013612cb9
                                }
                              }
     }
