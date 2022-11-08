@@ -51,3 +51,4 @@ withSonarQubeEnv(credentialsId: 'Mohamedchaali') {
 }
 }
 }
+}
