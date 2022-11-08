@@ -50,3 +50,5 @@ withSonarQubeEnv(credentialsId:'Mohamedchaali') {
     sh 'mvn clean package sonar:sonar'
 }
 }
+}
+}
