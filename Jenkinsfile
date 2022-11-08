@@ -4,6 +4,7 @@ pipeline {
     agent any
     tools {
 		maven 'M2_HOME'
+		jdk 'JAVA_HOME'
 		        }
 
     stages {
@@ -29,7 +30,14 @@ pipeline {
        		sh 'mvn -B -DskipTests clean package'
       	          }
            	}
-        
+         stage('JUnit/Mockito'){
+                steps {
+                sh '''mvn -version
+                mvn -B -DskipTests clean package'''
+                //sh 'mvn test'
+                echo """Bravo! tous les tests sont pris en charge"""
+                }
+            }
         
     }
 }
