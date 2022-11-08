@@ -38,6 +38,11 @@ pipeline {
                 echo """Bravo! tous les tests sont pris en charge"""
                 }
             }
+stage('integration testing'){
+                steps {
+sh 'mvn verify -DskipUnitTests'
          
+}
+}
 }
 }
