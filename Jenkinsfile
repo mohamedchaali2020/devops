@@ -38,12 +38,20 @@ pipeline {
                 echo """Bravo! tous les tests sont pris en charge"""
                 }
             }
-stage('integration testing'){
+        stage('integration testing'){
                 steps {
-sh 'mvn verify -DskipUnitTests'
+            sh 'mvn verify -DskipUnitTests'
          
 }
 }
+stage ('Static code analysis'){
+    steps {
+        withSonarQubeEnv(credentialsId: 'Mohamedchaali') {
+        sh 'mvn clean package sonar:sonar'
+}
+    }
+}
+
 
 }
 }
