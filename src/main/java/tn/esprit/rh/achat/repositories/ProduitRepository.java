@@ -6,16 +6,4 @@ import tn.esprit.rh.achat.entities.Produit;
 
 @Repository
 public interface ProduitRepository extends JpaRepository<Produit, Long> {
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
+	}
