@@ -15,8 +15,9 @@ import java.util.Set;
 @Slf4j
 @Transactional
 public class FactureServiceImpl implements IFactureService {
+	String log ;
 
-	@Autowired
+@Autowired
 	FactureRepository factureRepository;
 	@Autowired
 	OperateurRepository operateurRepository;
@@ -47,7 +48,7 @@ public class FactureServiceImpl implements IFactureService {
 	 * calculer les montants remise et le montant total d'un détail facture
 	 * ainsi que les montants d'une facture
 	 */
-	private Facture addDetailsFacture(Facture f, Set<DetailFacture> detailsFacture) {
+	private Facture (Facture f, Set<DetailFacture> detailsFacture) {
 		float montantFacture = 0;
 		float montantRemise = 0;
 		for (DetailFacture detail : detailsFacture) {
@@ -74,7 +75,7 @@ public class FactureServiceImpl implements IFactureService {
 	@Override
 	public void cancelFacture(Long factureId) {
 		// Méthode 01
-		//Facture facture = factureRepository.findById(factureId).get();
+		
 		Facture facture = factureRepository.findById(factureId).orElse(new Facture());
 		facture.setArchivee(true);
 		factureRepository.save(facture);
