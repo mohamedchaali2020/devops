@@ -1,14 +1,17 @@
 package tn.esprit.rh.achat.controllers;
 
-import io.swagger.annotations.Api;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+
+
+
+import io.swagger.annotations.Api;
 import tn.esprit.rh.achat.entities.Facture;
 import tn.esprit.rh.achat.services.IFactureService;
-
-import java.util.Date;
-import java.util.List;
 
 
 @RestController
@@ -35,7 +38,7 @@ public class FactureRestController {
         return factureService.retrieveFacture(factureId);
     }
 
-   
+     
     @PostMapping("/add-facture")
     @ResponseBody
     public Facture addFacture(@RequestBody Facture f) {
@@ -47,14 +50,14 @@ public class FactureRestController {
      * une facture peut etre annulé si elle a été saisie par erreur Pour ce
      * faire, il suffit de mettre le champs active à false
      */
-   
+    
     @PutMapping("/cancel-facture/{facture-id}")
     @ResponseBody
     public void cancelFacture(@PathVariable("facture-id") Long factureId) {
         factureService.cancelFacture(factureId);
     }
 
-    
+   
     @GetMapping("/getFactureByFournisseur/{fournisseur-id}")
     @ResponseBody
     public List<Facture> getFactureByFournisseur(@PathVariable("fournisseur-id") Long fournisseurId) {

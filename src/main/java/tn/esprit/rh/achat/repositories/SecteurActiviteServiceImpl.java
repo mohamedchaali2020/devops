@@ -1,15 +1,18 @@
-package tn.esprit.rh.achat.services;
+package tn.esprit.rh.achat.repositories;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import tn.esprit.rh.achat.entities.SecteurActivite;
-import java.util.List;
+
 
 @Service
 public class SecteurActiviteServiceImpl implements ISecteurActiviteService{
 
 	@Autowired
-	SecteurActivite secteurActiviteRepository;
+	SecteurActiviteRepository secteurActiviteRepository;
 	@Override
 	public List<SecteurActivite> retrieveAllSecteurActivite() {
 		return (List<SecteurActivite>) secteurActiviteRepository.findAll();

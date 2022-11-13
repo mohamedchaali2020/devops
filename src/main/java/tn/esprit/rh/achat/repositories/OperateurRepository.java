@@ -1,10 +1,29 @@
 package tn.esprit.rh.achat.repositories;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+
 import tn.esprit.rh.achat.entities.Operateur;
 
-@Repository
-public interface OperateurRepository extends CrudRepository<Operateur, Long> {
+public class OperateurRepository {
+
+	public List<Operateur> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void save(Operateur o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Object findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

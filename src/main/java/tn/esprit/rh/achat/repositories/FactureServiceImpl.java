@@ -1,20 +1,27 @@
-package tn.esprit.rh.achat.services;
+package tn.esprit.rh.achat.repositories;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import tn.esprit.rh.achat.entities.*;
-import tn.esprit.rh.achat.repositories.*;
-
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import tn.esprit.rh.achat.entities.DetailFacture;
+import tn.esprit.rh.achat.entities.Facture;
+import tn.esprit.rh.achat.entities.Fournisseur;
+import tn.esprit.rh.achat.entities.Operateur;
+import tn.esprit.rh.achat.entities.Produit;
+import tn.esprit.rh.achat.repositories.DetailFactureRepository;
+import tn.esprit.rh.achat.repositories.FactureRepository;
+import tn.esprit.rh.achat.repositories.FournisseurRepository;
+import tn.esprit.rh.achat.repositories.OperateurRepository;
+import tn.esprit.rh.achat.repositories.ProduitRepository;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
 @Transactional
-public class FactureServiceImpl<FactureRepository, OperateurRepository, DetailFactureRepository, FournisseurRepository, ProduitRepository> implements IFactureService {
+public class FactureServiceImpl<FactureRepository, DetailFactureRepository> implements IFactureService {
 
 	@Autowired
 	FactureRepository factureRepository;
@@ -31,7 +38,7 @@ public class FactureServiceImpl<FactureRepository, OperateurRepository, DetailFa
 	
 	@Override
 	public List<Facture> retrieveAllFactures() {
-		List<Facture> factures = (List<Facture>) factureRepository.findll();
+		List<Facture> factures = (List<Facture>) factureRepository.findAll();
 		for (Facture facture : factures) {
 			log.info(" facture : " + facture);
 		}
@@ -74,7 +81,7 @@ public class FactureServiceImpl<FactureRepository, OperateurRepository, DetailFa
 	@Override
 	public void cancelFacture(Long factureId) {
 		// Méthode 01
-		//Facture facture = factureRepository.findById(factureId).get();
+		
 		Facture facture = factureRepository.findById(factureId).orElse(new Facture());
 		facture.setArchivee(true);
 		factureRepository.save(facture);

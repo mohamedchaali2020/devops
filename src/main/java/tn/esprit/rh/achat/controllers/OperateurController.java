@@ -1,12 +1,14 @@
 package tn.esprit.rh.achat.controllers;
 
-import io.swagger.annotations.Api;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+
+import io.swagger.annotations.Api;
 import tn.esprit.rh.achat.entities.Operateur;
 import tn.esprit.rh.achat.services.IOperateurService;
-
-import java.util.List;
 
 @RestController
 @Api(tags = "Gestion des opérateurs")
@@ -40,7 +42,7 @@ public class OperateurController {
 		return operateur;
 	}
 
-	
+	// http://localhost:8089/SpringMVC/operateur/remove-operateur/{operateur-id}
 	@DeleteMapping("/remove-operateur/{operateur-id}")
 	@ResponseBody
 	public void removeOperateur(@PathVariable("operateur-id") Long operateurId) {
@@ -50,8 +52,8 @@ public class OperateurController {
 	// http://localhost:8089/SpringMVC/operateur/modify-operateur
 	@PutMapping("/modify-operateur")
 	@ResponseBody
-	public Operateur modifyOperateur(@RequestBody Operateur operateur) {
-		return operateurService.updateOperateur(operateur);
+	public Operateur modifyOperateur(@RequestBody Operateur op) {
+		return operateurService.updateOperateur(op);
 	}
 
 	

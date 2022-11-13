@@ -1,11 +1,12 @@
-package tn.esprit.rh.achat.services;
+package tn.esprit.rh.achat.repositories;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import tn.esprit.rh.achat.entities.CategorieProduit;
 
-
-import java.util.List;
 
 @Service
 public class CategorieProduitServiceImpl implements ICategorieProduitService {
