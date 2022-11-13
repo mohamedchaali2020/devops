@@ -14,7 +14,7 @@ import java.util.Set;
 @Service
 @Slf4j
 @Transactional
-public class FactureServiceImpl implements IFactureService {
+public class FournisseurServiceImpl implements IFactureService {
 
 	@Autowired
 	FactureRepository factureRepository;
