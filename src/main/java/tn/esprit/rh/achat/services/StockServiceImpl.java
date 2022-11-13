@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.rh.achat.entities.Stock;
-
+import tn.esprit.rh.achat.repositories.StockRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class StockServiceImpl<StockRepository> implements IStockService {
+public class StockServiceImpl implements IStockService {
 
 	@Autowired
 	StockRepository stockRepository;

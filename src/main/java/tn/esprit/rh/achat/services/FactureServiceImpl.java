@@ -14,7 +14,7 @@ import java.util.Set;
 @Service
 @Slf4j
 @Transactional
-public class FactureServiceImpl<FactureRepository, OperateurRepository, DetailFactureRepository, FournisseurRepository, ProduitRepository> implements IFactureService {
+public class FactureServiceImpl implements IFactureService {
 
 	@Autowired
 	FactureRepository factureRepository;
@@ -31,7 +31,7 @@ public class FactureServiceImpl<FactureRepository, OperateurRepository, DetailFa
 	
 	@Override
 	public List<Facture> retrieveAllFactures() {
-		List<Facture> factures = (List<Facture>) factureRepository.findll();
+		List<Facture> factures = (List<Facture>) factureRepository.findAll();
 		for (Facture facture : factures) {
 			log.info(" facture : " + facture);
 		}
