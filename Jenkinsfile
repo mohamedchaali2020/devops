@@ -55,7 +55,12 @@ script{
 }
     }
 }
-
-
+stage ('Quality Gate status') {
+steps {
+script {
+waitForQualityGate abortPipeline: false, credentialsId: 'Mohamedchaali1'
+}
+}
+}
 }
 }
