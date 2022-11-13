@@ -54,7 +54,7 @@ pipeline {
                             sonar.language=java \
                             sonar.projectKey=spring \
                             sonar.host.url=http://192.168.1.19:9000 \
-                            sonar.login=74372c3cf08ec88f4b5d8310afe1095ddc65979e
+                            sonar.login=ab46e35f88984ed285fe48c639506314c3d1b4cd
 
 
                     """
