@@ -29,7 +29,7 @@ pipeline {
 
 	    stage('Maven Build') {
       		    steps {
-       		sh 'mvn clean install'
+       		sh 'mvn clean compile'
       	          }
            	}
          stage('JUnit/Mockito'){
