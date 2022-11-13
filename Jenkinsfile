@@ -51,10 +51,10 @@ pipeline {
  stage('SonarQube Analysis'){
                 steps {
                     sh """mvn sonar:sonar -DskipTests \
-                            sonar.language=java \
-                            sonar.projectKey=spring \
-                            sonar.host.url=http://192.168.1.19:9000 \
-                            sonar.login=ab46e35f88984ed285fe48c639506314c3d1b4cd
+                            -Dsonar.language=java \
+                            -Dsonar.projectKey=spring \
+                            -Dsonar.host.url=http://192.168.1.19:9000 \
+                            -Dsonar.login=ab46e35f88984ed285fe48c639506314c3d1b4cd
 
 
                     """
