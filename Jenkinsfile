@@ -7,10 +7,7 @@ pipeline {
 		jdk 'JAVA_HOME'
 		        }
 
-environment {
 
-         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-	 }
 
     stages {
 
