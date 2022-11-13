@@ -7,6 +7,11 @@ pipeline {
 		jdk 'JAVA_HOME'
 		        }
 
+environment {
+
+         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+	 }
+
     stages {
 
 
@@ -44,10 +49,12 @@ pipeline {
          
 }
 }
-stage ('Static code analysis'){
+stage ('SonarQube analysis'){
     steps {
+script{
         withSonarQubeEnv(credentialsId: 'Mohamedchaali') {
         sh 'mvn clean package sonar:sonar'
+}
 }
     }
 }
