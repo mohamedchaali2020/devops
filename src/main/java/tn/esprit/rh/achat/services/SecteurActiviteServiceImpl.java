@@ -17,7 +17,7 @@ public class SecteurActiviteServiceImpl implements ISecteurActiviteService{
 		return (List<SecteurActivite>) secteurActiviteRepository.findAll();
 	}
 
-	@Override
+	
 	public SecteurActivite addSecteurActivite(SecteurActivite sa) {
 		secteurActiviteRepository.save(sa);
 		return sa;
