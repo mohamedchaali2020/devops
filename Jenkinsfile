@@ -57,7 +57,7 @@ pipeline {
  stage('SonarQube Analysis'){
                 steps {
                     script{
-withSonarQubeEnv(credentialsId: 'spring') {
+withSonarQubeEnv(credentialsId: 'medred') {
     sh 'mvn clean package sonar:sonar'
 }
 
@@ -69,7 +69,7 @@ withSonarQubeEnv(credentialsId: 'spring') {
 stage ('Quality Gate status') {
 steps {
 script {
-waitForQualityGate abortPipeline: false, credentialsId: 'spring'
+waitForQualityGate abortPipeline: false, credentialsId: 'medred'
 }
 }
 }
