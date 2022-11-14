@@ -20,23 +20,27 @@ pipeline {
             }
         }
         
-        stage('Cleaning the project') {
-                 steps{
-                    sh "mvn -B -DskipTests clean  "
-                    }
-                }
+        stage('Maven version'){
+            steps{
+                echo "Mavin version ...";
+                sh "mvn -version"
+            }
+        }
+         stage('Clean Maven install'){
+            steps {
+                sh 'mvn clean install'
+            }
 
-
-	    stage('Maven Build') {
-      		    steps {
-       		sh 'mvn clean compile'
-      	          }
-           	}
+        }
+         stage('Compile Project'){
+            steps {
+                sh 'mvn compile  -DskipTests'
+            }
+        }
          stage('JUnit/Mockito'){
                 steps {
-                sh '''mvn -version
-                mvn -B -DskipTests clean package'''
-                //sh 'mvn test'
+                
+               sh 'mvn test'
                 echo """Bravo! tous les tests sont pris en charge"""
                 }
             }
