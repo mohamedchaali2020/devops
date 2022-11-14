@@ -20,12 +20,7 @@ pipeline {
             }
         }
         
-        stage('Maven version'){
-            steps{
-                echo "Mavin version ...";
-                sh "mvn -version"
-            }
-        }
+        
        stage('Cleaning the project') {
                  steps{
                     sh "mvn -B -DskipTests clean  "
