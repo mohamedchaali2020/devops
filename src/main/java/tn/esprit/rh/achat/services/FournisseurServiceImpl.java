@@ -1,117 +1,89 @@
 package tn.esprit.rh.achat.services;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import tn.esprit.rh.achat.entities.*;
-import tn.esprit.rh.achat.repositories.*;
-
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import tn.esprit.rh.achat.entities.DetailFournisseur;
+import tn.esprit.rh.achat.entities.Fournisseur;
+import tn.esprit.rh.achat.entities.SecteurActivite;
+import tn.esprit.rh.achat.repositories.DetailFournisseurRepository;
+import tn.esprit.rh.achat.repositories.FournisseurRepository;
+import tn.esprit.rh.achat.repositories.ProduitRepository;
+import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-@Transactional
-public class FournisseurServiceImpl implements IFactureService {
+public class FournisseurServiceImpl implements IFournisseurService {
 
-	@Autowired
-	FactureRepository factureRepository;
-	@Autowired
-	OperateurRepository operateurRepository;
-	@Autowired
-	DetailFactureRepository detailFactureRepository;
 	@Autowired
 	FournisseurRepository fournisseurRepository;
 	@Autowired
+	DetailFournisseurRepository detailFournisseurRepository;
+	@Autowired
 	ProduitRepository produitRepository;
-    @Autowired
-    ReglementServiceImpl reglementService;
-	
+	@Autowired
+	SecteurActiviteRepository secteurActiviteRepository;
+
 	@Override
-	public List<Facture> retrieveAllFactures() {
-		List<Facture> factures = (List<Facture>) factureRepository.findAll();
-		for (Facture facture : factures) {
-			log.info(" facture : " + facture);
+	public List<Fournisseur> retrieveAllFournisseurs() {
+		List<Fournisseur> fournisseurs = (List<Fournisseur>) fournisseurRepository.findAll();
+		for (Fournisseur fournisseur : fournisseurs) {
+			log.info(" fournisseur : " + fournisseur);
 		}
-		return factures;
+		return fournisseurs;
 	}
 
+
+	public Fournisseur addFournisseur(Fournisseur f /*Master*/) {
+		DetailFournisseur df= new DetailFournisseur();//Slave
+		df.setDateDebutCollaboration(new Date()); //util
+		//On affecte le "Slave" au "Master"
+		f.setDetailFournisseur(df);	
+		fournisseurRepository.save(f);
+		return f;
+	}
 	
-	public Facture addFacture(Facture f) {
-		return factureRepository.save(f);
+	private DetailFournisseur  saveDetailFournisseur(Fournisseur f){
+		DetailFournisseur df = f.getDetailFournisseur();
+		detailFournisseurRepository.save(df);
+		return df;
 	}
 
-	/*
-	 * calculer les montants remise et le montant total d'un détail facture
-	 * ainsi que les montants d'une facture
-	 */
-
-	private Facture addDetailsFacture(Facture f, Set<DetailFacture> detailsFacture) {
-		float montantFacture = 0;
-		float montantRemise = 0;
-		for (DetailFacture detail : detailsFacture) {
-			//Récuperer le produit 
-			Produit produit = produitRepository.findById(detail.getProduit().getIdProduit()).get();
-			//Calculer le montant total pour chaque détail Facture
-			float prixTotalDetail = detail.getQteCommandee() * produit.getPrix();
-			//Calculer le montant remise pour chaque détail Facture
-			float montantRemiseDetail = (prixTotalDetail * detail.getPourcentageRemise()) / 100;
-			float prixTotalDetailRemise = prixTotalDetail - montantRemiseDetail;
-			detail.setMontantRemise(montantRemiseDetail);
-			detail.setPrixTotalDetail(prixTotalDetailRemise);
-			//Calculer le montant total pour la facture
-			montantFacture = montantFacture + prixTotalDetailRemise;
-			//Calculer le montant remise pour la facture
-			montantRemise = montantRemise + montantRemiseDetail;
-			detailFactureRepository.save(detail);
-		}
-		f.setMontantFacture(montantFacture);
-		f.setMontantRemise(montantRemise);
+	public Fournisseur updateFournisseur(Fournisseur f) {
+		DetailFournisseur df = saveDetailFournisseur(f);
+		f.setDetailFournisseur(df);	
+		fournisseurRepository.save(f);
 		return f;
 	}
 
 	@Override
-	public void cancelFacture(Long factureId) {
-		
-		
-		Facture facture = factureRepository.findById(factureId).orElse(new Facture());
-		facture.setArchivee(true);
-		factureRepository.save(facture);
-		
-		factureRepository.updateFacture(factureId);
+	public void deleteFournisseur(Long fournisseurId) {
+		fournisseurRepository.deleteById(fournisseurId);
+
 	}
 
 	@Override
-	public Facture retrieveFacture(Long factureId) {
+	public Fournisseur retrieveFournisseur(Long fournisseurId) {
 
-		Facture facture = factureRepository.findById(factureId).orElse(null);
-		log.info("facture :" + facture);
-		return facture;
+		Fournisseur fournisseur = fournisseurRepository.findById(fournisseurId).orElse(null);
+		return fournisseur;
 	}
 
 	@Override
-	public List<Facture> getFacturesByFournisseur(Long idFournisseur) {
+	public void assignSecteurActiviteToFournisseur(Long idSecteurActivite, Long idFournisseur) {
 		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
-		return (List<Facture>) fournisseur.getFactures();
+		SecteurActivite secteurActivite = secteurActiviteRepository.findById(idSecteurActivite).orElse(null);
+        fournisseur.getSecteurActivites().add(secteurActivite);
+        fournisseurRepository.save(fournisseur);
+		
+		
 	}
 
-	@Override
-	public void assignOperateurToFacture(Long idOperateur, Long idFacture) {
-		Facture facture = factureRepository.findById(idFacture).orElse(null);
-		Operateur operateur = operateurRepository.findById(idOperateur).orElse(null);
-		operateur.getFactures().add(facture);
-		operateurRepository.save(operateur);
-	}
-
-	@Override
-	public float pourcentageRecouvrement(Date startDate, Date endDate) {
-		float totalFacturesEntreDeuxDates = factureRepository.getTotalFacturesEntreDeuxDates(startDate,endDate);
-		float totalRecouvrementEntreDeuxDates =reglementService.getChiffreAffaireEntreDeuxDate(startDate,endDate);
-		float pourcentage=(totalRecouvrementEntreDeuxDates/totalFacturesEntreDeuxDates)*100;
-		return pourcentage;
-	}
 	
 
 }

@@ -1,9 +1,11 @@
 package tn.esprit.rh.achat.services;
 
-import tn.esprit.rh.achat.entities.Reglement;
-
 import java.util.Date;
 import java.util.List;
+
+import tn.esprit.rh.achat.entities.Reglement;
+
+
 
 public interface IReglementService {
 

@@ -1,13 +1,16 @@
 package tn.esprit.rh.achat.repositories;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import tn.esprit.rh.achat.entities.Reglement;
 
-import java.util.Date;
-import java.util.List;
+import tn.esprit.rh.achat.entities.Facture;
+import tn.esprit.rh.achat.entities.Produit;
+import tn.esprit.rh.achat.entities.Reglement;
 
 @Repository
 public interface ReglementRepository extends CrudRepository<Reglement, Long>{

@@ -1,8 +1,10 @@
 package tn.esprit.rh.achat.services;
 
+import java.util.List;
+
 import tn.esprit.rh.achat.entities.CategorieProduit;
 
-import java.util.List;
+
 
 
 public interface ICategorieProduitService {

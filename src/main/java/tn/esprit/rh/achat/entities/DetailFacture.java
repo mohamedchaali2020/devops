@@ -31,4 +31,5 @@ public class DetailFacture implements Serializable {
 	@ManyToOne
 	@JsonIgnore
 	Facture facture;
+
 }

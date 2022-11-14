@@ -1,8 +1,9 @@
 package tn.esprit.rh.achat.services;
 
+import java.util.List;
+
 import tn.esprit.rh.achat.entities.Fournisseur;
 
-import java.util.List;
 
 public interface IFournisseurService {
 

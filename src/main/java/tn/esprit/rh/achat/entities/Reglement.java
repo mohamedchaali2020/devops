@@ -1,4 +1,5 @@
 package tn.esprit.rh.achat.entities;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Entity
 @Getter
 @Setter
@@ -32,4 +34,5 @@ public class Reglement implements Serializable{
 	@ManyToOne
 	@JsonIgnore
 	private Facture facture;
-	}
+	
+}
