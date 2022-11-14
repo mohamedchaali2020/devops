@@ -75,6 +75,7 @@ waitForQualityGate abortPipeline: false, credentialsId: 'spring'
 stage('upload war file to Nexus') {
             steps {
                 script{
+def readPomVersion = readMavenPom file: 'pom.xml'
 nexusArtifactUploader artifacts: [
 [
 artifactId: 'achat', 
@@ -88,7 +89,7 @@ nexusUrl: '192.168.1.192:8081',
 nexusVersion: 'nexus3', 
 protocol: 'http', 
 repository: 'devops-releas', 
-version: '1.0'
+version: "${readPomVersion.version}"
 }
             }
         }
