@@ -93,5 +93,7 @@ version: "${readPomVersion.version}"
 }
             }
         }
+
+
 }
 }
