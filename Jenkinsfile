@@ -38,10 +38,10 @@ pipeline {
                 sh 'mvn compile  -DskipTests'
             }
         }
-         stage('JUnit/Mockito'){
-                steps {
-                
-               sh 'mvn test'
+         stage ('Mockito/Junit') {
+             steps {
+            sh 'mvn test -Dtest="FactureServiceImplMockito" '
+            sh 'mvn test -Dtest="ReglementServiceImpTest" '
                 echo """Bravo! tous les tests sont pris en charge"""
                 }
             }

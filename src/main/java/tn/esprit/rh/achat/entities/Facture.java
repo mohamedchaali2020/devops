@@ -1,5 +1,4 @@
 package tn.esprit.rh.achat.entities;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -20,7 +19,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 public class Facture implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -43,4 +42,16 @@ public class Facture implements Serializable {
     @OneToMany(mappedBy="facture")
     @JsonIgnore
     private Set<Reglement> reglements;
-    }
+	public Facture(Long idFacture, float montantRemise, float montantFacture, Date dateCreationFacture,
+			Date dateDerniereModificationFacture, Boolean archivee) {
+		this.idFacture = idFacture;
+		this.montantRemise = montantRemise;
+		this.montantFacture = montantFacture;
+		this.dateCreationFacture = dateCreationFacture;
+		this.dateDerniereModificationFacture = dateDerniereModificationFacture;
+		this.archivee = archivee;
+		
+	}
+    
+
+}
