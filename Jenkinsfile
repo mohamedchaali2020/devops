@@ -72,5 +72,10 @@ waitForQualityGate abortPipeline: false, credentialsId: 'spring'
 }
 }
 }
+stage('Nexus') {
+            steps {
+                sh 'mvn deploy -DskipTests'
+            }
+        }
 }
 }
