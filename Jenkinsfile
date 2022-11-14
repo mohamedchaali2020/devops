@@ -63,7 +63,7 @@ withSonarQubeEnv(credentialsId: 'spring') {
 stage ('Quality Gate status') {
 steps {
 script {
-waitForQualityGate abortPipeline: false, credentialsId: 'Mohamedchaali1'
+waitForQualityGate abortPipeline: false, credentialsId: 'spring'
 }
 }
 }
