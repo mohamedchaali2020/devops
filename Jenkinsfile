@@ -41,8 +41,7 @@ pipeline {
          stage ('Mockito/Junit') {
              steps {
             
-           sh 'mvn test -Dtest="SecteurActiviteServiceImplMock" '
-            sh 'mvn test -Dtest="FournisseurServiceImplTest" '
+            sh "mvn test"
                 echo """Bravo! tous les tests sont pris en charge"""
                 }
             }
