@@ -21,18 +21,23 @@ pipeline {
         }
         
         
-       stage('Cleaning the project') {
-                 steps{
-                    sh "mvn -B -DskipTests clean  "
-                    }
-                }
+       stage('Maven version'){
+            steps{
+                echo "Mavin version ...";
+                sh "mvn -version"
+            }
+        }
+         stage('Clean Maven install'){
+            steps {
+                sh 'mvn clean install'
+            }
 
-
-	        stage('Build') {
-      		    steps {
-        		sh 'mvn -B -DskipTests clean package'
-      		          }
-            	}
+        }
+         stage('Compile Project'){
+            steps {
+                sh 'mvn compile  -DskipTests'
+            }
+        }
          stage('JUnit/Mockito'){
                 steps {
                 
