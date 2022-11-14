@@ -15,8 +15,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.esprit.examen.entities.Facture;
-import com.esprit.examen.repositories.FactureRepository;
+import tn.esprit.rh.achat.entities.Facture;
+import tn.esprit.rh.achat.repositories.FactureRepository;
+import tn.esprit.rh.achat.services.FactureServiceImpl;
 @ExtendWith(MockitoExtension.class)
 class FactureServiceImplMockito {
 
