@@ -72,9 +72,24 @@ waitForQualityGate abortPipeline: false, credentialsId: 'spring'
 }
 }
 }
-stage('Nexus') {
+stage('upload war file to Nexus') {
             steps {
-                sh 'mvn deploy -DskipTests'
+                script{
+nexusArtifactUploader artifacts: [
+[
+artifactId: 'achat', 
+classifier: '', file: 'target/tpmagasin.jar', 
+type: 'jar'
+]
+],
+ credentialsId: 'nexus-auth', 
+groupId: 'tn.esprit.rh', 
+nexusUrl: '192.168.1.192:8081', 
+nexusVersion: 'nexus3', 
+protocol: 'http', 
+repository: 'devops-releas', 
+version: '1.0'
+}
             }
         }
 }
