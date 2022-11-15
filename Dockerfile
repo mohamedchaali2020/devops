@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM openjdk:8-jdk-alpine
 EXPOSE 8089
-COPY target/tpmagasin-1.0.jar tpmagasin.jar
-ENTRYPOINT ["java","-jar","/tpmagasin.jar"]
+ADD ./target/tpmagasin-1.0.jar test-docker.jar
+ENTRYPOINT ["java","-jar","/test-docker.jar"]
