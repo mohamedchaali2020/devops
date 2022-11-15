@@ -93,6 +93,28 @@ version: "${readPomVersion.version}"
 }
             }
         }
+        
+         stage("Building Docker Image") {
+                steps{
+                    sh 'docker build -t mohamedchaali/achat .'
+                }
+        }
+        stage("Login to DockerHub") {
+                steps{
+
+                    sh 'docker login -u mohamedchaali -p 203JMT1226'
+                }
+        }
+        stage("Push to DockerHub") {
+                steps{
+                    sh 'docker push mohamedchaali/achat'
+                }
+        }
+        stage("Docker-compose") {
+                steps{
+                    sh 'docker-compose up -d'
+                }
+        }
 
 
 }
