@@ -6,7 +6,10 @@ pipeline {
 		maven 'M2_HOME'
 		jdk 'JAVA_HOME'
 		        }
+ environment {
 
+         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+	 }
 
 
     stages {
@@ -101,8 +104,8 @@ version: "${readPomVersion.version}"
         }
         stage("Login to DockerHub") {
                 steps{
-
-                    sh 'docker login -u mohamedchaali -p 203JMT1226'
+					sh 'docker login --username mohamedchaali --password 203JMT1226'
+                    
                 }
         }
         stage("Push to DockerHub") {
