@@ -6,11 +6,7 @@ pipeline {
 		maven 'M2_HOME'
 		jdk 'JAVA_HOME'
 		        }
- environment {
-
-         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-	 }
-
+ 
 
     stages {
 
