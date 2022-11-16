@@ -82,29 +82,34 @@ protocol: 'http',
             }
         }
         
-         stage("Building Docker Image") {
-                steps{
-                    sh 'docker build -t mohamedchaali/achat .'
-                }
-        }
-        stage("Login to DockerHub") {
-                steps{
-                	sh 'docker login -u mohamedchaali -p 203JMT1226'
-					
-                    
-                }
-        }
-        stage("Push to DockerHub") {
-                steps{
-                    sh 'docker push mohamedchaali/achat'
-                }
-        }
-        stage("Docker-compose") {
-                steps{
-                    sh 'docker-compose up -d'
-                }
-        }
+         stage('Build Docker Image'){
+                      steps {
+                          script{
+          				    sh 'docker image build  -t mohamedchaali/achat .  '
+                          }
+                      }
+          		}
+          		stage('Docker login') {
+                                steps {
+                                    script {
+                                        sh 'docker login -u mohamedchaali -p 203JMT1226'}
+                                }
+                                }
+                          stage('Pushing Docker Image') {
+                                steps {
+                                    script {
+                                     sh 'docker push mohamedchaali/achat'
+                                    }
+                          }
+                          }
+                          stage('Run Spring && MySQL Containers') {
+                                steps {
+                                    script {
+                                      sh 'docker-compose up -d'
+                                    }
+                                }
+                            }
+     }
 
+     }
 
-}
-}
