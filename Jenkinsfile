@@ -60,13 +60,6 @@ stage("Sonar") {
 
  
  
-stage ('Quality Gate status') {
-steps {
-script {
-waitForQualityGate abortPipeline: false, credentialsId: 'devdev'
-}
-}
-}
 stage('upload war file to Nexus') {
             steps {
                 script{
