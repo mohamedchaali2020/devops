@@ -51,19 +51,15 @@ pipeline {
 }
 }
 
-
- stage('SonarQube Analysis'){
-                steps {
-                    script{
-withSonarQubeEnv(credentialsId: 'devdev') {
-    sh 'mvn clean package sonar:sonar'
-}
+stage("Sonar") {
+            steps {
+                sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=root"
+            }
+        }
 
 
-}
-                }
-
-            } 
+ 
+ 
 stage ('Quality Gate status') {
 steps {
 script {
