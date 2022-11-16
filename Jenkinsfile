@@ -52,18 +52,18 @@ pipeline {
 }
 
 
- // stage('SonarQube Analysis'){
-    //            steps {
-     //               script{
-// withSonarQubeEnv(credentialsId: 'devdev') {
-  //  sh 'mvn clean package sonar:sonar'
-//}
+ stage('SonarQube Analysis'){
+                steps {
+                    script{
+withSonarQubeEnv(credentialsId: 'devdev') {
+    sh 'mvn clean package sonar:sonar'
+}
 
 
-//}
+}
                 }
 
-  //          } 
+            } 
 stage ('Quality Gate status') {
 steps {
 script {
@@ -71,27 +71,27 @@ waitForQualityGate abortPipeline: false, credentialsId: 'devdev'
 }
 }
 }
-// stage('upload war file to Nexus') {
-  //          steps {
-    //            script{
-// def readPomVersion = readMavenPom file: 'pom.xml'
-// nexusArtifactUploader artifacts: [
-// [
-// artifactId: 'achat', 
-// classifier: '', file: 'target/tpmagasin.jar', 
-// type: 'jar'
-// ]
-// ],
- // credentialsId: 'nexus-auth', 
-// groupId: 'tn.esprit.rh', 
-// nexusUrl: '192.168.1.192:8081', 
-// nexusVersion: 'nexus3', 
-// protocol: 'http', 
-// repository: 'devops-releas', 
-// version: "${readPomVersion.version}"
-// }
-   //         }
-     //   }
+stage('upload war file to Nexus') {
+            steps {
+                script{
+def readPomVersion = readMavenPom file: 'pom.xml'
+nexusArtifactUploader artifacts: [
+[
+artifactId: 'achat', 
+classifier: '', file: 'target/tpmagasin.jar', 
+type: 'jar'
+]
+],
+credentialsId: 'nexus-auth', 
+groupId: 'tn.esprit.rh', 
+nexusUrl: '192.168.1.192:8081', 
+nexusVersion: 'nexus3', 
+protocol: 'http', 
+ repository: 'devops-releas', 
+ version: "${readPomVersion.version}"
+ }
+            }
+        }
         
          stage("Building Docker Image") {
                 steps{
