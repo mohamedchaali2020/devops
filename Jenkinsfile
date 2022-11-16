@@ -54,7 +54,7 @@ pipeline {
 
  // stage('SonarQube Analysis'){
     //            steps {
-                    script{
+     //               script{
 // withSonarQubeEnv(credentialsId: 'devdev') {
   //  sh 'mvn clean package sonar:sonar'
 //}
