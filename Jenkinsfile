@@ -109,7 +109,23 @@ protocol: 'http',
                                     }
                                 }
                             }
+
+
      }
 
+post {
+        success {
+             mail to: "mohamed.chaali@esprit.tn",
+                    subject: "Build sucess",
+                    body: "sucess"
+            echo 'successful'
+        }
+        failure {
+             mail to: "mohamed.chaali@esprit.tn",
+                    subject: "Build failed",
+                    body: "failed"
+            echo 'failed'
+        }
+      }
      }
 
